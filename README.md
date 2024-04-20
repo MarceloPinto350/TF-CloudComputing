@@ -1,2 +1,8 @@
-# TF-CloudComputing
-Atividade reerente ao trabalho final da disciplina de Coud Computing
+# Trabalho Final da disciplina Cloud Computing
+
+
+## Grupo composto
+* Alykson
+* Marcelo
+
+## Configuração do Cluster
