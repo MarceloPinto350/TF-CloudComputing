@@ -31,20 +31,19 @@ spec:
             configMapKeyRef:
               name: postgres-config
               key: POSTGRES_DB
-
+    - name: loki
+      image: grafana/loki:latest
+      ports:
+        - containerPort: 3100
+      volumeMounts:
+      - name: fluentd-config
+        mountPath: /etc/fluent/fluent.conf
 #  - name: app-web
 #    image: <imagem_da_aplicacao_python>:<tag_da_versao> 
 #    - containerPort: 8000
 #    env:
 #    - name: DATABASE_URL
 #      value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
-  - name: loki
-    image: grafana/loki:latest
-    ports:
-      - containerPort: 3100
-    volumeMounts:
-    - name: fluentd-config
-      mountPath: /etc/fluent/fluent.conf
 #  - name: nginx
 #    image: nginx:latest
 #    ports:
@@ -73,4 +72,4 @@ spec:
   ports:
     - port: 5432
   type: ClusterIP
-
+---
