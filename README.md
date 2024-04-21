@@ -30,6 +30,7 @@ network:
       addresses: [10.100.0.10/24]
   version: 2
 ```
+* Para aplicar as configurações execute: $ sudo netplan apply
 
 ### Instalação e configuração do cluster:
 1. Proceder a exclusão do snapd
