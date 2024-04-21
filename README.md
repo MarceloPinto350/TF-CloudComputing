@@ -104,9 +104,8 @@ rm -rf /var/lib/kubelet/*
 apt-get install nfs-common -y
 ```
 
-Sugestão de de crir o arquivo config-k8s.ini e executá-lo, conforme segue
- * $ nano config-k8s.ini
- Copiar o conteúdo acima para o arquivo e salvar, executando-o em seguida.
+Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
+ * $ nano config-k8s.ini (copiar o conteúdo acima para o arquivo e salvar, executando-o em seguida).
  * $ sudo sh config-k8s.ini
 
 ### Para inicializar o cluster kubernetes: (No Master)
@@ -123,10 +122,10 @@ Sugestão de de crir o arquivo config-k8s.ini e executá-lo, conforme segue
 2. Habilitar o acesso à rede interna do nó worker, para o master e demais nós, conforme o caso, conectar e sair (somente para confiar na chave), conforme o exemplo abaixo:
  * tfworker1 $ ssh 192.168.100.10
   * tfmaster $ exit
- 1.  Conectar o nó Master ao nó worker, conforme o exemplo a seguir:
+ 2.1.  Conectar o nó Master ao nó worker, conforme o exemplo a seguir:
   * tfmaster $ ssh 192.168.0.101
    * tfworker1 $ exit
- 2. Conforme o caso, conectar o worker1 com o worker2 e vice-versa:
+ 2.2. Conforme o caso, conectar o worker1 com o worker2 e vice-versa:
   * tfworker1 $ ssh 192.168.0.102
   * tfworker2 $ ssh 192.168.0.101
 3. Adicionar o nó no Cluster, executando o comando abaixo:
