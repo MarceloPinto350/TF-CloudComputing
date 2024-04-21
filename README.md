@@ -153,18 +153,19 @@ kadmin@tfmaster:~$
 sudo kubeadm reset
 sudo rm -rf /etc/cni/net.d
 sudo rm -rf /etc/kubernetes
+sudo rm -rf /opt/cni
 rm -rf .kube
 sudo sh config-k8s.ini
 # execute o comando abaixo trocando o endereço de rede pelo que estiver em modo NAT ou BRIDGE
-sudo kubeadm init --apiserver-advertise-address 192.168.0.18 --pod-network-cidr=10.100.0.0/16 --v=5
+sudo kubeadm init --apiserver-advertise-address 192.168.0.18 --pod-network-cidr=192.168.0.0/16 --v=5
 # após a conclusão da confiração
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # copiar o trecho equivalente para inlcuir os workers no cluster
-#kubeadm join 192.168.0.18:6443 --token 1zyfg9.mmqn9hrpujl2y3ft \
-#	--discovery-token-ca-cert-hash sha256:d97a16d7b596ea00bd2ab61c96e708ec7a194f76b5727edd9a3695e407de7e69
+#kubeadm join 192.168.0.18:6443 --token al4za2.k0jq3o4pyu3k7vtx \
+#	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -173,10 +174,11 @@ kubectl get nodes -o wide
 4. Executar os passos do script abaixo nos nós **Worker** que desejar adicionar
 ```shell
 sudo rm -rf /etc/kubernetes
+sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join 192.168.0.18:6443 --token 1zyfg9.mmqn9hrpujl2y3ft \
-	--discovery-token-ca-cert-hash sha256:d97a16d7b596ea00bd2ab61c96e708ec7a194f76b5727edd9a3695e407de7e69
+sudo kubeadm join 192.168.0.18:6443 --token al4za2.k0jq3o4pyu3k7vtx \
+	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
