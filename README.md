@@ -20,14 +20,16 @@
  * Worker2: 192.168.100.20
 4. Configuração das placas de rede locais
  * editar o arquivo /etc/netplan/00-installer-config.yaml e deixá-lo conforme abaixo
-`network:
+ 
+```yaml
+network:
   ethernets:
     enp0s3:
       dhcp4: true
     enp0s8:
       addresses: [10.100.0.10/24]
   version: 2
-`
+```
 
 ### Instalação e configuração do cluster:
 1. Proceder a exclusão do snapd
