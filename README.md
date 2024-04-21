@@ -19,7 +19,7 @@
  * Worker1: 192.168.100.15
  * Worker2: 192.168.100.20
 4. Configuração das placas de rede locais
- * editar o arquivo /etc/netplan/00-installer-config.yaml e deixá-lo conforme abaixo
+ * editar o arquivo /etc/netplan/00-installer-config.yaml e deixá-lo conforme abaixo:
  
 ```yaml
 network:
@@ -35,7 +35,8 @@ network:
 1. Proceder a exclusão do snapd
  * $ sudo apt purge snapd
 2. Conectar na VM via SSH, copiar e rodar o script disponível em (https://gist.github.com/ramonfontes/b0858679da30adbf0b79c1716ee3f660), cujo conteúdo segue a seguir:
-`
+
+```shell
 #!/bin/bash 
 
 export DEBIAN_FRONTEND=noninteractive
@@ -101,10 +102,11 @@ apt-get install -y  kubelet kubeadm kubectl kubernetes-cni nfs-common
 
 rm -rf /var/lib/kubelet/*
 apt-get install nfs-common -y
-`
+```
+
 Sugestão de de crir o arquivo config-k8s.ini e executá-lo, conforme segue
  * $ nano config-k8s.ini
- Compiar o conteúdo acima para o arquivo e salvar.
+ Copiar o conteúdo acima para o arquivo e salvar, executando-o em seguida.
  * $ sudo sh config-k8s.ini
 
 ### Para inicializar o cluster kubernetes: (No Master)
@@ -116,19 +118,19 @@ Sugestão de de crir o arquivo config-k8s.ini e executá-lo, conforme segue
  * $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 
-Configuração dos Nodes
-Executar as configurações indicadas nos passos 1, 2 e 3, observando-se as configurações de rede indicadas para cada nó (worker)
-Habilitar o acesso à rede interna do nó worker, para o master e demais nós, conforme o caso, conectar  sair (somente para confiar na chave), conforme o exemplo abaixo:
-tfworker1 $ ssh 192.168.100.10
-tfmaster $ exit
-Conectar o nó Master ao nó worker, conforme o exemplo a seguir:
-tfmaster $ ssh 192.168.0.101
-tfworker1 $ exit
-Conforme o caso, conectar o worker1 com o worker2 e vice-versa:
-tfworker1 $ ssh 192.168.0.102
-tfworker2 $ ssh 192.168.0.101
-Adicionar o nó no Cluster, executando o comando abaixo:
-sudo kubeadm join 192.168.0.18:6443 --token t2jfcw.dnkuklpn7pi27e15 \
+### Configuração dos Nodes
+1. Executar as configurações indicadas nos passos 1, 2 e 3, observando-se as configurações de rede indicadas para cada nó (worker)
+2. Habilitar o acesso à rede interna do nó worker, para o master e demais nós, conforme o caso, conectar e sair (somente para confiar na chave), conforme o exemplo abaixo:
+ * tfworker1 $ ssh 192.168.100.10
+  * tfmaster $ exit
+ 1.  Conectar o nó Master ao nó worker, conforme o exemplo a seguir:
+  * tfmaster $ ssh 192.168.0.101
+   * tfworker1 $ exit
+ 2. Conforme o caso, conectar o worker1 com o worker2 e vice-versa:
+  * tfworker1 $ ssh 192.168.0.102
+  * tfworker2 $ ssh 192.168.0.101
+3. Adicionar o nó no Cluster, executando o comando abaixo:
+ * sudo kubeadm join 192.168.0.18:6443 --token t2jfcw.dnkuklpn7pi27e15 \
 	--discovery-token-ca-cert-hash sha256:b5f7c04eadf55cb193fc924bc8bd050136fdfd26352bc2641e008764c5e79d32
 
 
