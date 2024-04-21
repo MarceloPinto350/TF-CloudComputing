@@ -38,11 +38,13 @@ spec:
 #    env:
 #    - name: DATABASE_URL
 #      value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
-#  - name: logs
-#    image: <imagem_do_servico_de_logs>
-#    volumeMounts:
-#    - name: logs
-#      mountPath: /var/log
+  - name: loki
+    image: grafana/loki:latest
+    ports:
+      - containerPort: 3100
+    volumeMounts:
+    - name: fluentd-config
+      mountPath: /etc/fluent/fluent.conf
 #  - name: nginx
 #    image: nginx:latest
 #    ports:
@@ -54,11 +56,12 @@ spec:
     - name: postgresdb
       persistentVolumeClaim:
         claimName: postgres-pvc
-    - name: logs
-      emptyDir: {}
-  - name: static
-    secret:
-      secretName: static-content
+    - name: fluentd-config
+      configMap:
+        name: fluentd-config 
+#  - name: static
+#    secret:
+#      secretName: static-content
 ---
 kind: Service
 apiVersion: v1
@@ -70,3 +73,4 @@ spec:
   ports:
     - port: 5432
   type: ClusterIP
+

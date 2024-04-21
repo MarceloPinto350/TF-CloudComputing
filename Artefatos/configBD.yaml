@@ -4,6 +4,7 @@ metadata:
   name: postgres-config
   labels:
     app: postgres
+  namespace: biblioteca
 data:
   POSTGRES_DB: bibpubdp
   POSTGRES_USER: bibpub
