@@ -7,7 +7,7 @@ spec:
   containers:
     - name: banco-dados
       image: alpine/postgres:16
-      imagepullpolicy: IfNotPresent
+      #imagepullpolicy: IfNotPresent
       ports:
         - containerPort: 5432
       volumeMounts:
