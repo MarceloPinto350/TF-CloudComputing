@@ -66,6 +66,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: postgres
+  namespace: biblioteca
 spec:
   selector:
     app: postgres
