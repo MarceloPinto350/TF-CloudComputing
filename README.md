@@ -136,7 +136,7 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
 ```
 
 ## Reconfiguração do cluster
-1. Importar o appliance
+1. Importar o appliance;
 2. Caso apresente erro simlar a este:
 ```log
 $ kubectl get nodes -o wide
@@ -148,7 +148,7 @@ E0421 14:48:26.383987    2461 memcache.go:265] couldn't get current server API g
 The connection to the server 192.168.100.10:6443 was refused - did you specify the right host or port?
 kadmin@tfmaster:~$ 
 ```
-3. Executar os passos do script a seguir no Master:
+3. Executar os passos do script a seguir no **Master**:
 ```shell
 sudo kubeadm reset
 sudo rm -rf /etc/cni/net.d
@@ -170,7 +170,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl get nodes -o wide
 ```
 
-4. Executar os passos do script abaixo nos nós workers que sesejar adicionar
+4. Executar os passos do script abaixo nos nós **Worker** que desejar adicionar
 ```shell
 sudo rm -rf /etc/kubernetes
 sudo sh config-k8s.ini
@@ -178,7 +178,7 @@ sudo sh config-k8s.ini
 sudo kubeadm join 192.168.0.18:6443 --token 1zyfg9.mmqn9hrpujl2y3ft \
 	--discovery-token-ca-cert-hash sha256:d97a16d7b596ea00bd2ab61c96e708ec7a194f76b5727edd9a3695e407de7e69
 ```
-
-
+5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
+* $ kubectl get nodes -o wide
 
 
