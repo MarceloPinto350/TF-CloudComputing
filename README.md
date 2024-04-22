@@ -110,7 +110,7 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
  * $ sudo sh config-k8s.ini
 
 ### Para inicializar o cluster kubernetes: (No Master)
-* sudo kubeadm init --apiserver-advertise-address 192.168.0.18 --pod-network-cidr=192.168.0.0/16 --v=5  
+* sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5  
 * Executar os comandos após configurar o cluster para ter acesso com o usuário criado na VM
 ```shell 
  mkdir -p $HOME/.kube
@@ -131,8 +131,8 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
   * tfworker2: $ ssh 192.168.100.101
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
- sudo kubeadm join 192.168.0.18:6443 --token t2jfcw.dnkuklpn7pi27e15 \
-	--discovery-token-ca-cert-hash sha256:b5f7c04eadf55cb193fc924bc8bd050136fdfd26352bc2641e008764c5e79d32
+ sudo kubeadm join 192.168.0.14:6443 --token 4d0jq2.ipdjevtb2x5fpq4a \
+	--discovery-token-ca-cert-hash sha256:4c730d1e07fd377397f572e17856d2735a919576396e4ac42f6a4f69a9775cb1
 ```
 
 ## Reconfiguração do cluster
@@ -157,15 +157,16 @@ sudo rm -rf /opt/cni
 rm -rf .kube
 sudo sh config-k8s.ini
 # execute o comando abaixo trocando o endereço de rede pelo que estiver em modo NAT ou BRIDGE
-sudo kubeadm init --apiserver-advertise-address 192.168.0.18 --pod-network-cidr=192.168.0.0/16 --v=5
-# após a conclusão da confiração
+sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
+# após a conclusão da configuração
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # copiar o trecho equivalente para inlcuir os workers no cluster
-#kubeadm join 192.168.0.18:6443 --token al4za2.k0jq3o4pyu3k7vtx \
+#kubeadm join <url-bridge ou nat:6443 --token al4za2.k0jq3o4pyu3k7vtx \
 #	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
+
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -177,7 +178,7 @@ sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join 192.168.0.18:6443 --token al4za2.k0jq3o4pyu3k7vtx \
+sudo kubeadm join <url-bridge ou nat>:6443 --token al4za2.k0jq3o4pyu3k7vtx \
 	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
