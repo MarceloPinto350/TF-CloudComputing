@@ -118,6 +118,9 @@ sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=
  mkdir -p $HOME/.kube
  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# Para incluir o gerenciamento de rede para o cluster, incluir o calico
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
 
 ### Adicionando workers na configuração do cluster kubernetes
