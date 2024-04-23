@@ -123,16 +123,23 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
 2. Habilitar o acesso à rede interna do nó worker, para o master e demais nós, conforme o caso, conectar e sair (somente para confiar na chave), conforme o exemplo abaixo:
  * tfworker1:  $ ssh 192.168.100.100
   * tfmaster:  $ exit
+
  2.1.  Conectar o nó Master ao nó worker, conforme o exemplo a seguir:
   * tfmaster:  $ ssh 192.168.100.101
    * tfworker1: $ exit
+  * tfmaster:  $ ssh 192.168.100.102
+   * tfworker2: $ exit
+
  2.2. Conforme o caso, conectar o worker1 com o worker2 e vice-versa:
   * tfworker1: $ ssh 192.168.100.102
+  * tfworker1: $ ssh 192.168.100.100
   * tfworker2: $ ssh 192.168.100.101
+  * tfworker2: $ ssh 192.168.100.100
+
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
- sudo kubeadm join 192.168.0.14:6443 --token 4d0jq2.ipdjevtb2x5fpq4a \
-	--discovery-token-ca-cert-hash sha256:4c730d1e07fd377397f572e17856d2735a919576396e4ac42f6a4f69a9775cb1
+ sudo kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
+	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
 ```
 
 ## Reconfiguração do cluster
