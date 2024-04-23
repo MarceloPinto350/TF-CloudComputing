@@ -110,7 +110,9 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
  * $ sudo sh config-k8s.ini
 
 ### Para inicializar o cluster kubernetes: (No Master)
-* sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5  
+```shell
+sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
+```
 * Executar os comandos após configurar o cluster para ter acesso com o usuário criado na VM
 ```shell 
  mkdir -p $HOME/.kube
@@ -138,8 +140,8 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
 
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
- sudo kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
-	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
+ sudo kubeadm join 192.168.0.14:6443 --token ddulkv.r5j354wgxgwro05b \
+	--discovery-token-ca-cert-hash sha256:6b07d37ee0df61f9d8a0001ec52779c9cd0b5a878677556ec949b301d913970b
 ```
 
 ## Reconfiguração do cluster
@@ -171,9 +173,8 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # copiar o trecho equivalente para inlcuir os workers no cluster
-#kubeadm join <url-bridge ou nat:6443 --token al4za2.k0jq3o4pyu3k7vtx \
-#	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
-
+#kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
+#	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -185,8 +186,8 @@ sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join <url-bridge ou nat>:6443 --token al4za2.k0jq3o4pyu3k7vtx \
-	--discovery-token-ca-cert-hash sha256:96f286aff92c45ac7c7cc843f9d5ea86f513666ea5e9868a901aa634e8f64095
+kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
+	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
