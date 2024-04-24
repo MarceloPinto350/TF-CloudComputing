@@ -31,26 +31,37 @@ spec:
             configMapKeyRef:
               name: postgres-config
               key: POSTGRES_DB
-    - name: loki
-      image: grafana/loki:latest
+
+    - name: app-biblioteca
+      image: marcelopinto350/bibpub:1.0
+      depends_on:
+        - banco-dados
+      env:
+      - name: DATABASE_URL
+        value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
+      ports:
+      - containerPort: 8000
+    
+    - name: fluentd
+      image: fluentd/fluentd:latest
       ports:
         - containerPort: 3100
       volumeMounts:
-      - name: fluentd-config
-        mountPath: /etc/fluent/fluent.conf
-  - name: app-web
-    image: marcelopinto350/bibpub:1.0
-    - containerPort: 8000
-    env:
-    - name: DATABASE_URL
-      value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
-  - name: nginx
-    image: nginx:latest
-    ports:
-    - containerPort: 80
-    volumeMounts:
-    - name: static
-      mountPath: /usr/share/nginx/html
+      - name: logs
+        mountPath: /var/log/bibpub
+      command:
+      - "fluentd"
+      - "-c"
+      - "/fluentd/etc/fluentd.conf"
+
+    - name: nginx
+      image: nginx:latest
+      ports:
+      - containerPort: 80
+      volumeMounts:
+      - name: logs
+        mountPath: /var/log/nginx
+  
   volumes:
     - name: postgresdb
       persistentVolumeClaim:
@@ -58,9 +69,10 @@ spec:
     - name: fluentd-config
       configMap:
         name: fluentd-config 
-#  - name: static
-#    secret:
-#      secretName: static-content
+    - name: static
+      secret:
+      secretName: static-content
+
 ---
 kind: Service
 apiVersion: v1
@@ -73,16 +85,17 @@ spec:
   ports:
     - port: 5432
   type: ClusterIP
+
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: postgres
+  name: bibpub
   namespace: biblioteca
 spec:
   selector:
-    app: postgres
+    app: app-biblioteca
   ports:
-    - port: 5432
+    - port: 8000
   type: ClusterIP
 
