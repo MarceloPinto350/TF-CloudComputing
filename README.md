@@ -143,8 +143,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
- sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
-	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
+sudo kubeadm join 192.168.0.14:6443 --token jsnbrj.9wlu7h90z0btnln2 \
+	--discovery-token-ca-cert-hash sha256:723359a24ed377cd4c1b72c4aed99f68203bba085c5b0df760dfc000677b3c26 
 ```
 
 ## Reconfiguração do cluster
@@ -169,15 +169,16 @@ sudo rm -rf /opt/cni
 rm -rf .kube
 sudo sh config-k8s.ini
 # execute o comando abaixo trocando o endereço de rede pelo que estiver em modo NAT ou BRIDGE
-sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
+sudo kubeadm join 192.168.0.14:6443 --token jsnbrj.9wlu7h90z0btnln2 \
+	--discovery-token-ca-cert-hash sha256:723359a24ed377cd4c1b72c4aed99f68203bba085c5b0df760dfc000677b3c26 
 # após a conclusão da configuração
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 # copiar o trecho equivalente para incluir os workers no cluster
-sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
-	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
+sudo kubeadm join 192.168.0.14:6443 --token jsnbrj.9wlu7h90z0btnln2 \
+	--discovery-token-ca-cert-hash sha256:723359a24ed377cd4c1b72c4aed99f68203bba085c5b0df760dfc000677b3c26 
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -189,8 +190,8 @@ sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
-	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
+sudo kubeadm join 192.168.0.14:6443 --token jsnbrj.9wlu7h90z0btnln2 \
+	--discovery-token-ca-cert-hash sha256:723359a24ed377cd4c1b72c4aed99f68203bba085c5b0df760dfc000677b3c26 
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
