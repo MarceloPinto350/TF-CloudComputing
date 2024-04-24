@@ -198,6 +198,15 @@ kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
 
 # Configuração das aplicações
 
+## Arquitetura da solução
+
+* Banco de dados: SGBD PostgreSql que armazena os dados da aplicação da biblioteca pública.
+* Aplicação Bibpub: É uma aplicação Python/Django, que possiblita o controle de empréstimo de obras.
+* Fluentd: É um serviço de coleta logs da aplicação Django e os envia para um servidor externo.
+* Nginx: É um servidor que roteia o tráfego externo para a aplicação Django e fornece acesso ao painel de monitoramento do Fluentd.
+
+
+## Como configurar os serviços
 1. Conectar no nó Master do cluster e fazer o clone da configurações deste projeto, utiliznado o seguinte comando:
 ```sheel
 $ ssh kadmin@192.168.100.100

@@ -74,3 +74,15 @@ spec:
     - port: 5432
   type: ClusterIP
 ---
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: biblioteca
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+  type: ClusterIP
+
