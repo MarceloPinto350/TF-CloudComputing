@@ -111,7 +111,7 @@ Sugestão de criar o arquivo config-k8s.ini e executá-lo, conforme segue
 
 ### Para inicializar o cluster kubernetes: (No Master)
 ```shell
-sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
+sudo kubeadm init --apiserver-advertise-address 192.168.100.100 --pod-network-cidr=192.168.0.0/16 --v=5
 ```
 * Executar os comandos após configurar o cluster para ter acesso com o usuário criado na VM
 ```shell 
@@ -143,8 +143,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
- sudo kubeadm join 192.168.0.14:6443 --token ddulkv.r5j354wgxgwro05b \
-	--discovery-token-ca-cert-hash sha256:6b07d37ee0df61f9d8a0001ec52779c9cd0b5a878677556ec949b301d913970b
+ sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
+	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
 ```
 
 ## Reconfiguração do cluster
