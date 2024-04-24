@@ -175,9 +175,9 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-# copiar o trecho equivalente para inlcuir os workers no cluster
-#kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
-#	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
+# copiar o trecho equivalente para incluir os workers no cluster
+sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
+	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -189,8 +189,8 @@ sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
-	--discovery-token-ca-cert-hash sha256:cdec0e3460f0a0e80057c3c7b9a3632d02d857a6cc3f0921e2fd5c08e8a45049
+sudo kubeadm join 192.168.100.100:6443 --token dl65hq.gyjnn3cvlddhei3f \
+	--discovery-token-ca-cert-hash sha256:e55e25ef203658e9cccb8956c2ebb243733ce0be83a36b3485a40ccea2f86a90
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
