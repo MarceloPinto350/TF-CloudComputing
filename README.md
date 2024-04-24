@@ -196,3 +196,15 @@ kubeadm join 192.168.0.14:6443 --token in2e4r.cb81ur8mkham91ot \
 * $ kubectl get nodes -o wide
 
 
+# Configuração das aplicações
+
+1. Conectar no nó Master do cluster e fazer o clone da configurações deste projeto, utiliznado o seguinte comando:
+```sheel
+$ ssh kadmin@192.168.100.100
+$ git clone https://github.com/MarceloPinto350/TF-CloudComputing.git
+```
+2. Aplicar os manifestos conforme indicado
+```sheel
+$ kubectl apply -f /manifestos/criaNamespace,yaml
+$ kubectl apply -f /manifestos/
+```
