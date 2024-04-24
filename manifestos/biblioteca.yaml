@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - name: banco-dados
-      image: alpine/postgres:16
+      image: alpine/postgres
       #imagepullpolicy: IfNotPresent
       ports:
         - containerPort: 5432
@@ -38,19 +38,19 @@ spec:
       volumeMounts:
       - name: fluentd-config
         mountPath: /etc/fluent/fluent.conf
-#  - name: app-web
-#    image: <imagem_da_aplicacao_python>:<tag_da_versao> 
-#    - containerPort: 8000
-#    env:
-#    - name: DATABASE_URL
-#      value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
-#  - name: nginx
-#    image: nginx:latest
-#    ports:
-#    - containerPort: 80
-#    volumeMounts:
-#    - name: static
-#      mountPath: /usr/share/nginx/html
+  - name: app-web
+    image: marcelopinto350/bibpub:1.0
+    - containerPort: 8000
+    env:
+    - name: DATABASE_URL
+      value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: static
+      mountPath: /usr/share/nginx/html
   volumes:
     - name: postgresdb
       persistentVolumeClaim:
