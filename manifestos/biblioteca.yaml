@@ -34,8 +34,8 @@ spec:
 
     - name: app-biblioteca
       image: marcelopinto350/bibpub:1.0
-      depends_on:
-        - banco-dados
+      #depends_on:
+      #  - banco-dados
       env:
       - name: DATABASE_URL
         value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
@@ -69,9 +69,8 @@ spec:
     - name: fluentd-config
       configMap:
         name: fluentd-config 
-    - name: static
-      secret:
-      secretName: static-content
+    - name: logs
+      emptyDir: {}
 
 ---
 kind: Service
@@ -86,16 +85,16 @@ spec:
     - port: 5432
   type: ClusterIP
 
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: bibpub
-  namespace: biblioteca
-spec:
-  selector:
-    app: app-biblioteca
-  ports:
-    - port: 8000
-  type: ClusterIP
+#---
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: bibpub
+#  namespace: biblioteca
+#spec:
+#  selector:
+#    app: app-biblioteca
+#  ports:
+#    - port: 8000
+#  type: ClusterIP
 
