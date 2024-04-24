@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - name: banco-dados
-      image: alpine/postgres
+      image: postgres:alpine
       #imagepullpolicy: IfNotPresent
       ports:
         - containerPort: 5432
@@ -43,7 +43,7 @@ spec:
       - containerPort: 8000
     
     - name: fluentd
-      image: fluentd/fluentd:latest
+      image: fluentd:latest
       ports:
         - containerPort: 3100
       volumeMounts:
