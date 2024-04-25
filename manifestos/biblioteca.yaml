@@ -32,13 +32,15 @@ spec:
               name: postgres-config
               key: POSTGRES_DB
 
-    - name: app-biblioteca
-      image: marcelopinto350/bibpub:1.0
+    - name: app-bibpub
+      image: marcelopinto350/bibpub:1.2
       #depends_on:
       #  - banco-dados
       env:
-      - name: DATABASE_URL
-        value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
+        - name: POSTGRES_HOST
+          value: "postgres-svc:default"
+        - name: POSTGRES_PORT
+          value: "5432"
       ports:
       - containerPort: 8000
     
@@ -76,24 +78,24 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: postgres
+  name: postgres-svc
   namespace: biblioteca
 spec:
-  selector:
-    app: postgres
+  # selector:
+  #  app: postgres
   ports:
     - port: 5432
-  type: NodePort
-#---
+  type: ClusterIP
+---
 kind: Service
 apiVersion: v1
 metadata:
-  name: bibpub
+  name: biblioteca-svc
   namespace: biblioteca
 spec:
-  selector:
-    app: app-biblioteca
+  #selector:
+  #  app: app-biblioteca
   ports:
     - port: 8000
-  type: ClusterIP
+  type: NodePort
 
