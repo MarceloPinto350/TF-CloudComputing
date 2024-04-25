@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: fluentd-daemonset
-  namespace: biblioteca
+  name: fluentd-ds
+  namespace: logging
 spec:
   selector:
     matchLabels:

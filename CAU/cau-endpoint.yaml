@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: cau-service
+  namespace: apps
+  uid: b2a4a462-cbd1-4e51-aebe-8d6830aa661c
+  resourceVersion: '2677364997'
+  creationTimestamp: '2024-02-20T14:18:51Z'
+  labels:
+    app: cau
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: '2024-04-13T17:03:35Z'
+  managedFields:
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2024-04-13T17:03:39Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:metadata:
+          f:annotations:
+            .: {}
+            f:endpoints.kubernetes.io/last-change-trigger-time: {}
+          f:labels:
+            .: {}
+            f:app: {}
+        f:subsets: {}
+  selfLink: /api/v1/namespaces/apps/endpoints/cau-service
+subsets:
+  - addresses:
+      - ip: 10.233.121.144
+        nodeName: hml-adm-k8s-node-04
+        targetRef:
+          kind: Pod
+          namespace: apps
+          name: cau-deploy-9997f7699-x9cmd
+          uid: 13468251-f775-4d1b-aa3c-ba01740318ba
+          resourceVersion: '2677364994'
+    ports:
+      - name: http
+        port: 8080
+        protocol: TCP

@@ -83,18 +83,17 @@ spec:
     app: postgres
   ports:
     - port: 5432
-  type: ClusterIP
-
+  type: NodePort
 #---
-#kind: Service
-#apiVersion: v1
-#metadata:
-#  name: bibpub
-#  namespace: biblioteca
-#spec:
-#  selector:
-#    app: app-biblioteca
-#  ports:
-#    - port: 8000
-#  type: ClusterIP
+kind: Service
+apiVersion: v1
+metadata:
+  name: bibpub
+  namespace: biblioteca
+spec:
+  selector:
+    app: app-biblioteca
+  ports:
+    - port: 8000
+  type: ClusterIP
 
