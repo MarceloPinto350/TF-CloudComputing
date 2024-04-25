@@ -12,3 +12,4 @@ spec:
       #  value: postgres://banco-dados:<senha_do_postgres>@banco-dados:5432
       ports:
       - containerPort: 8000
+      

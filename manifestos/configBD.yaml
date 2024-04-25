@@ -8,3 +8,4 @@ metadata:
 data:
   POSTGRES_DB: bibpubdp
   POSTGRES_USER: bibpub
+  

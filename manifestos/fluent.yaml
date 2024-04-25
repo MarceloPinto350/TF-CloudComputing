@@ -20,3 +20,4 @@ spec:
   volumes:
     - name: logs
       emptyDir: {}
+      
