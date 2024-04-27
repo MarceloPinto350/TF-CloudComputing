@@ -7,7 +7,6 @@ spec:
   containers:
     - name: banco-dados
       image: postgres:alpine
-      #imagepullpolicy: IfNotPresent
       ports:
         - containerPort: 5432
       volumeMounts:
@@ -34,8 +33,6 @@ spec:
 
     - name: app-bibpub
       image: marcelopinto350/bibpub:1.2
-      #depends_on:
-      #  - banco-dados
       env:
         - name: POSTGRES_HOST
           value: "postgres-svc:default"
@@ -73,29 +70,4 @@ spec:
         name: fluentd-config 
     - name: logs
       emptyDir: {}
-
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: postgres-svc
-  namespace: biblioteca
-spec:
-  # selector:
-  #  app: postgres
-  ports:
-    - port: 5432
-  type: ClusterIP
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: biblioteca-svc
-  namespace: biblioteca
-spec:
-  #selector:
-  #  app: app-biblioteca
-  ports:
-    - port: 8000
-  type: NodePort
 
