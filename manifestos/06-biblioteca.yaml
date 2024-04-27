@@ -5,6 +5,9 @@ metadata:
   namespace: biblioteca
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: app-biblioteca
   template:
     spec:
       containers:
