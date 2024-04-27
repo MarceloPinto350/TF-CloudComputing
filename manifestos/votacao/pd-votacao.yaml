@@ -20,14 +20,14 @@ spec:
         - mountPath: /var/lib/postgresql/data
           name: db-data
     # container do redis
-    - image: redis:alpine
-      name: redis
-      ports:
-        - containerPort: 6379
-          name: redis
-      volumeMounts:
-        - mountPath: /data
-          name: redis-data
+#    - image: redis:alpine
+#      name: redis
+#      ports:
+#        - containerPort: 6379
+#          name: redis
+#      volumeMounts:
+#        - mountPath: /data
+#          name: redis-data
     # container da aplicação de votação
     - image: kodekloud/examplevotingapp_vote:v1
       name: votacao-app
@@ -66,17 +66,17 @@ spec:
     targetPort: 5432
 # serviço do redis
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: redis-svc
-  namespace: votacao
-spec:
-  type: ClusterIP
-  ports:
-  - name: redis-svc
-    port: 6379
-    targetPort: 6379
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: redis-svc
+#  namespace: votacao
+#spec:
+#  type: ClusterIP
+#  ports:
+#  - name: redis-svc
+#    port: 6379
+#    targetPort: 6379
 # serviço da aplicação de resultado
 ---
 kind: Service
