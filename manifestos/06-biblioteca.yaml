@@ -42,10 +42,10 @@ spec:
                   key: POSTGRES_DB
         # aplicação de biblioteca
         - name: app-bibpub
-          image: marcelopinto350/bibpub:1.8
+          image: marcelopinto350/bibpub:1.7
           env:
             - name: POSTGRES_HOST
-              value: "10.107.250.134"
+              value: "banco-dados"
             #  value: "postgres-svc:biblioteca"
           ports:
           - containerPort: 8000
