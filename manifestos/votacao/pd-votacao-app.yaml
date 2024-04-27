@@ -1,45 +1,50 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: votacao-apps
   namespace: votacao
 spec:
-  containers:
-    # container da aplicação de votação
-    - image: kodekloud/examplevotingapp_vote:v1
-      name: votacao-app
-      ports:
-        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: votacao-apps
+  template:
+    metadata:
+      labels:
+        app: votacao-apps
+    spec:
+      containers:
+        # container da aplicação de votação
+        - image: kodekloud/examplevotingapp_vote:v1
           name: votacao-app
-    # conatainer da aplicação de resultado
-#    - image: kodekloud/examplevotingapp_result:v1
-#      name: resultado-app
-#      ports:
-#        - containerPort: 8080
-#          name: resultado-app
-#    nodeSelector:
-#      tiposvc: app
-    # container do worker
-    - image: kodekloud/examplevotingapp_worker:v1
-      name: worker
-  nodeSelector:
-    tiposvc: app
-      
+          ports:
+            - containerPort: 80
+              name: votacao-app
+        # conatainer da aplicação de resultado
+        - image: kodekloud/examplevotingapp_result:v1
+          name: resultado-app
+          ports:
+            - containerPort: 8080
+              name: resultado-app
+        # container do worker
+        - image: kodekloud/examplevotingapp_worker:v1
+          name: worker
+          
           
 # colocação dos serviços para acesso externo
 ---
-#kind: Service
-#apiVersion: v1
-#metadata:
-#  name: resultado-svc
-#  namespace: votacao
-#spec:
-#  type: NodePort
-#  ports:
-#  - name: "resultado-svc"
-#    port: 5001
-#    targetPort: 8080
-#    nodePort: 31001
+kind: Service
+apiVersion: v1
+metadata:
+  name: resultado-svc
+  namespace: votacao
+spec:
+  type: NodePort
+  ports:
+  - name: "resultado-svc"
+    port: 5001
+    targetPort: 8080
+    nodePort: 31001
 # serviço da aplicação de votação
 ---
 kind: Service
@@ -54,5 +59,4 @@ spec:
     port: 5000
     targetPort: 80
     nodePort: 31000
-  
-  
+ 
