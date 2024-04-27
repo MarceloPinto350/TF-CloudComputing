@@ -24,7 +24,7 @@ spec:
       name: worker
   nodeSelector:
     tiposvc: app
-    
+      
           
 # colocação dos serviços para acesso externo
 ---
