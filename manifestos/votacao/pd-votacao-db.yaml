@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: votacao-app
+  name: votacao-dbs
   namespace: votacao
 spec:
-  # containar do postgres
   containers:
+    # containar do postgres
     - image: postgres:9.4
       name: postgres
       env:
@@ -28,21 +28,7 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: redis-data
-    # container da aplicação de votação
-    - image: kodekloud/examplevotingapp_vote:v1
-      name: votacao-app
-      ports:
-        - containerPort: 80
-          name: votacao-app
-    # conatainer da aplicação de resultado
-    - image: kodekloud/examplevotingapp_result:v1
-      name: resultado-app
-      ports:
-        - containerPort: 80
-          name: resultado-app
-    # container do worker
-    - image: kodekloud/examplevotingapp_worker:v1
-      name: worker
+
   # volumes para persistência de dados  
   volumes:
     - name: db-data
@@ -78,32 +64,3 @@ spec:
     port: 6379
     targetPort: 6379
  serviço da aplicação de resultado
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: resultado-svc
-  namespace: votacao
-spec:
-  type: NodePort
-  ports:
-  - name: "resultado-svc"
-    port: 5001
-    targetPort: 8080
-    nodePort: 31001
-# serviço da aplicação de votação
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: votecao-svc
-  namespace: votacao
-spec:
-  type: NodePort
-  ports:
-  - name: "votacao-svc"
-    port: 5000
-    targetPort: 80
-    nodePort: 31000
-  
-  
