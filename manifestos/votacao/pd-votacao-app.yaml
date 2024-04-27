@@ -12,35 +12,35 @@ spec:
         - containerPort: 80
           name: votacao-app
     # conatainer da aplicação de resultado
-    - image: kodekloud/examplevotingapp_result:v1
-      name: resultado-app
-      ports:
-        - containerPort: 8080
-          name: resultado-app
+#    - image: kodekloud/examplevotingapp_result:v1
+#      name: resultado-app
+#      ports:
+#        - containerPort: 8080
+#          name: resultado-app
     # container do worker
     - image: kodekloud/examplevotingapp_worker:v1
       name: worker
           
 # colocação dos serviços para acesso externo
 ---
-kind: Service
-apiVersion: v1
-metadata:
-  name: resultado-svc
-  namespace: votacao
-spec:
-  type: NodePort
-  ports:
-  - name: "resultado-svc"
-    port: 5001
-    targetPort: 8080
-    nodePort: 31001
+#kind: Service
+#apiVersion: v1
+#metadata:
+#  name: resultado-svc
+#  namespace: votacao
+#spec:
+#  type: NodePort
+#  ports:
+#  - name: "resultado-svc"
+#    port: 5001
+#    targetPort: 8080
+#    nodePort: 31001
 # serviço da aplicação de votação
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: votecao-svc
+  name: votacao-svc
   namespace: votacao
 spec:
   type: NodePort
