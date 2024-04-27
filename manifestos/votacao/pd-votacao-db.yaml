@@ -37,10 +37,10 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: redis-data
-       # volumes para persistência de dados  
-  volumes:
-    - name: db-data
-      emptyDir: {}
-    - name: redis-data
-      emptyDir: {}
-          
+      # volumes para persistência de dados  
+      volumes:
+        - name: db-data
+          emptyDir: {}
+        - name: redis-data
+          emptyDir: {}
+              
