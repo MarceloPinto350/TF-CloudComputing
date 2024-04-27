@@ -1,0 +1,125 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: votacao-app
+  namespace: votacao
+spec:
+  # containar do postgres
+  containers:
+    - image: postgres:9.4
+      name: postgres
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"
+      env:
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+      ports:
+        - containerPort: 5432
+          name: postgres
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+    # container do redis
+    - image: redis:alpine
+      name: redis
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"
+      ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data
+    # container da aplicação de votação
+    - image: kodekloud/examplevotingapp_vote:v1
+      name: votacao-app
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"
+      ports:
+        - containerPort: 80
+          name: votacao-app
+    # conatainer da aplicação de resultado
+    - image: kodekloud/examplevotingapp_result:v1
+      name: resultado-app
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"
+      ports:
+        - containerPort: 80
+          name: resultado-app
+    # container do worker
+    - image: kodekloud/examplevotingapp_worker:v1
+        name: worker
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+  # volumes para persistência de dados  
+  volumes:
+    - name: db-data
+      emptyDir: {}
+    - name: redis-data
+          emptyDir: {}
+          
+# colocação dos serviços para acesso externo
+# serviço do postgres
+---
+kind: Service
+metadata:
+  name: postgres-svc
+  namespace: votacao
+spec:
+  type: ClusterIP
+  ports:
+  - name: postgres-svc
+    port: 5432
+    targetPort: 5432
+# serviço do redis
+---
+kind: Service
+metadata:
+  name: redis-svc
+  namespace: votacao
+spec:
+  type: ClusterIP
+  ports:
+  - name: redis-svc
+    port: 6379
+    targetPort: 6379
+# serviço da aplicação de resultado
+---
+kind: Service
+metadata:
+  name: resultado-svc
+  namespace: votacao
+spec:
+  type: NodePort
+  ports:
+  - name: resultado-svc
+    port: 5001
+    targetPort: 80
+    nodePort: 31001
+# serviço da aplicação de votação
+---
+kind: Service
+metadata:
+  name: votecao-svc
+  namespace: votacao
+spec:
+  type: NodePort
+  ports:
+  - name: votacao-svc
+    port: 5000
+    targetPort: 80
+    nodePort: 31000
+  
+  
