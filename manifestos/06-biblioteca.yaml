@@ -5,68 +5,74 @@ metadata:
   namespace: biblioteca
 spec:
   replicas: 1
-  containers:
-    - name: banco-dados
-      image: postgres:alpine
-      ports:
-        - containerPort: 5432
-      volumeMounts:
+  selector:
+    matchLabels:
+      app: app-bibioteca
+  template:
+    spec:
+      containers:
+        # container do banco da biblioteca
+        - name: banco-dados
+          image: postgres:alpine
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgresdb
+              mountPath: /var/lib/postgresql/data
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
+        # aplicação de biblioteca
+        - name: app-bibpub
+          image: marcelopinto350/bibpub:1.7
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-svc:default"
+          ports:
+          - containerPort: 8000
+        
+    #    - name: fluentd
+    #      image: fluentd:latest
+    #      ports:
+    #        - containerPort: 3100
+    #      volumeMounts:
+    #      - name: logs
+    #        mountPath: /var/log/bibpub
+    #      command:
+    #      - "fluentd"
+    #      - "-c"
+    #      - "/fluentd/etc/fluentd.conf"
+
+    #    - name: nginx
+    #      image: nginx:latest
+    #      ports:
+    #      - containerPort: 80
+    #      volumeMounts:
+    #      - name: logs
+    #        mountPath: /var/log/nginx
+      
+      volumes:
         - name: postgresdb
-          mountPath: /var/lib/postgresql/data
-      env:
-        - name: POSTGRES_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: password
-        - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
-        - name: POSTGRES_USER
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-config
-              key: POSTGRES_USER
-        - name: POSTGRES_DB
-          valueFrom:
-            configMapKeyRef:
-              name: postgres-config
-              key: POSTGRES_DB
-
-    - name: app-bibpub
-      image: marcelopinto350/bibpub:1.7
-      env:
-        - name: POSTGRES_HOST
-          value: "postgres-svc:default"
-      ports:
-      - containerPort: 8000
-    
-#    - name: fluentd
-#      image: fluentd:latest
-#      ports:
-#        - containerPort: 3100
-#      volumeMounts:
-#      - name: logs
-#        mountPath: /var/log/bibpub
-#      command:
-#      - "fluentd"
-#      - "-c"
-#      - "/fluentd/etc/fluentd.conf"
-
-#    - name: nginx
-#      image: nginx:latest
-#      ports:
-#      - containerPort: 80
-#      volumeMounts:
-#      - name: logs
-#        mountPath: /var/log/nginx
-  
-  volumes:
-    - name: postgresdb
-      persistentVolumeClaim:
-        claimName: postgres-pvc
-    - name: fluentd-config
-      configMap:
-        name: fluentd-config 
-    - name: logs
-      emptyDir: {}
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+    #    - name: fluentd-config
+    #      configMap:
+    #        name: fluentd-config 
+    #    - name: logs
+    #      emptyDir: {}
 
