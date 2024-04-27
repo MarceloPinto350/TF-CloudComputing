@@ -10,4 +10,4 @@ spec:
     port: 5001
     targetPort: 8080
     nodePort: 31001
- 
+ vim 

@@ -1,0 +1,11 @@
+kind: Service
+metadata:
+  name: biblioteca-svc
+  namespace: biblioteca
+spec:
+  type: NodePort
+  ports:
+  - name: "biblioteca-svc"
+    port: 8000
+    targetPort: 8000
+    nodePort: 32000
