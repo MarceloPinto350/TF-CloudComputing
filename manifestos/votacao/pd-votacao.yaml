@@ -20,14 +20,14 @@ spec:
         - mountPath: /var/lib/postgresql/data
           name: db-data
     # container do redis
-#    - image: redis:alpine
-#      name: redis
-#      ports:
-#        - containerPort: 6379
-#          name: redis
-#      volumeMounts:
-#        - mountPath: /data
-#          name: redis-data
+    - image: redis:alpine
+      name: redis
+      ports:
+        - containerPort: 6379
+          name: redis
+      volumeMounts:
+        - mountPath: /data
+          name: redis-data
     # container da aplicação de votação
     - image: kodekloud/examplevotingapp_vote:v1
       name: votacao-app
