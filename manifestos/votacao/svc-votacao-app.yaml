@@ -1,0 +1,13 @@
+apiVersion: v1         
+kind: Service
+metadata:
+  name: resultado-svc
+  namespace: votacao
+spec:
+  type: NodePort
+  ports:
+  - name: "resultado-svc"
+    port: 5001
+    targetPort: 8080
+    nodePort: 31001
+ 
