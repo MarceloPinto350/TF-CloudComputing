@@ -74,6 +74,7 @@ spec:
 # serviço do postgres
 ---
 kind: Service
+apiVersion: v1
 metadata:
   name: postgres-svc
   namespace: votacao
@@ -86,6 +87,7 @@ spec:
 # serviço do redis
 ---
 kind: Service
+apiVersion: v1
 metadata:
   name: redis-svc
   namespace: votacao
@@ -98,6 +100,7 @@ spec:
 # serviço da aplicação de resultado
 ---
 kind: Service
+apiVersion: v1
 metadata:
   name: resultado-svc
   namespace: votacao
@@ -111,6 +114,7 @@ spec:
 # serviço da aplicação de votação
 ---
 kind: Service
+apiVersion: v1
 metadata:
   name: votecao-svc
   namespace: votacao
