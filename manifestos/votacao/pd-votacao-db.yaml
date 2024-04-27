@@ -19,7 +19,7 @@ spec:
       volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data
-    nodeSelector:
+    - nodeSelector:
       tiposvc: db
     # container do redis
     - image: redis:alpine
@@ -30,7 +30,7 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: redis-data
-    nodeSelector:
+    - nodeSelector:
       tiposvc: db  
 
   # volumes para persistência de dados  
