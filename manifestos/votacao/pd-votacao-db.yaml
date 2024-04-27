@@ -28,8 +28,8 @@ spec:
       volumeMounts:
         - mountPath: /data
           name: redis-data
-  - nodeSelector:
-    tiposvc: db  
+    nodeSelector:
+      tiposvc: db  
 
   # volumes para persistência de dados  
   volumes:
