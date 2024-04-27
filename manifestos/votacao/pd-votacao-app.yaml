@@ -11,8 +11,6 @@ spec:
       ports:
         - containerPort: 80
           name: votacao-app
-    nodeSelector:
-      tiposvc: app
     # conatainer da aplicação de resultado
 #    - image: kodekloud/examplevotingapp_result:v1
 #      name: resultado-app
@@ -24,8 +22,8 @@ spec:
     # container do worker
     - image: kodekloud/examplevotingapp_worker:v1
       name: worker
-    nodeSelector:
-      tiposvc: app
+  nodeSelector:
+    tiposvc: app
           
 # colocação dos serviços para acesso externo
 ---
