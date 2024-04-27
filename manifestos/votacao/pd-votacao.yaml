@@ -20,7 +20,7 @@ spec:
       ports:
         - containerPort: 5432
           name: postgres
-        volumeMounts:
+      volumeMounts:
         - mountPath: /var/lib/postgresql/data
           name: db-data
     # container do redis
@@ -33,7 +33,7 @@ spec:
       ports:
         - containerPort: 6379
           name: redis
-        volumeMounts:
+      volumeMounts:
         - mountPath: /data
           name: redis-data
     # container da aplicação de votação
@@ -58,17 +58,17 @@ spec:
           name: resultado-app
     # container do worker
     - image: kodekloud/examplevotingapp_worker:v1
-        name: worker
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "250m"
+      name: worker
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"
   # volumes para persistência de dados  
   volumes:
     - name: db-data
       emptyDir: {}
     - name: redis-data
-          emptyDir: {}
+      emptyDir: {}
           
 # colocação dos serviços para acesso externo
 # serviço do postgres
