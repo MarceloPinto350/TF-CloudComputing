@@ -106,7 +106,7 @@ spec:
   ports:
   - name: resultado-svc
     port: 5001
-    targetPort: 80
+    targetPort: 81
     nodePort: 31001
 # serviço da aplicação de votação
 ---
