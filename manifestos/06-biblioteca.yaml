@@ -45,10 +45,16 @@ spec:
           image: marcelopinto350/bibpub:1.7
           env:
             - name: POSTGRES_HOST
-              value: "banco-dados "
+              value: "banco-dados.biblioteca.svc.cluster.local"
             #  value: "postgres-svc:biblioteca"
           ports:
           - containerPort: 8000
+          livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8000
+          initialDelaySeconds: 20
+          timeoutSeconds: 10
         
     #    - name: fluentd
     #      image: fluentd:latest

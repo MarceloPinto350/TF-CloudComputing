@@ -20,5 +20,8 @@ spec:
           env:
             - name: POSTGRES_HOST
               value: postgres-svc:biblioteca
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
           ports:
           - containerPort: 8000
