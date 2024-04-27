@@ -9,6 +9,9 @@ spec:
     matchLabels:
       app: app-biblioteca
   template:
+    metadata:
+      labels:
+          app: app-biblioteca
     spec:
       containers:
         # container do banco da biblioteca
