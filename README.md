@@ -143,8 +143,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 3. Adicionar o nó no Cluster, executando o comando abaixo:
  ```shell
-sudo kubeadm join 192.168.0.14:6443 --token pplqd9.wmqwh72nz69a7kwq \
-	--discovery-token-ca-cert-hash sha256:f078049618b3f522cd5f1aae83b26f51c11846192243675997a182d4598afb2f
+sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
+	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
 ```
 
 ## Reconfiguração do cluster
@@ -171,8 +171,9 @@ sudo sh config-k8s.ini
 # execute o comando abaixo trocando o endereço de rede pelo que estiver em modo NAT ou BRIDGE
 sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
 #
-#sudo kubeadm join 192.168.0.14:6443 --token jsnbrj.9wlu7h90z0btnln2 \
-#	--discovery-token-ca-cert-hash sha256:723359a24ed377cd4c1b72c4aed99f68203bba085c5b0df760dfc000677b3c26 
+sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
+	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
+
 # após a conclusão da configuração
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -180,8 +181,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # copiar o trecho equivalente para incluir os workers no cluster
-#sudo kubeadm join 192.168.0.14:6443 --token pplqd9.wmqwh72nz69a7kwq \
-#	--discovery-token-ca-cert-hash sha256:f078049618b3f522cd5f1aae83b26f51c11846192243675997a182d4598afb2f
+sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
+	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -189,12 +190,13 @@ kubectl get nodes -o wide
 
 4. Executar os passos do script abaixo nos nós **Worker** que desejar adicionar
 ```shell
+sudo kubeadm reset
 sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join 192.168.0.14:6443 --token pplqd9.wmqwh72nz69a7kwq \
-	--discovery-token-ca-cert-hash sha256:f078049618b3f522cd5f1aae83b26f51c11846192243675997a182d4598afb2f
+sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
+	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
