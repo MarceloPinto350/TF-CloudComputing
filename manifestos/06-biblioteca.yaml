@@ -45,7 +45,8 @@ spec:
           image: marcelopinto350/bibpub:1.7
           env:
             - name: POSTGRES_HOST
-              value: "postgres-svc:biblioteca"
+              value: "10.107.250.134"
+            #  value: "postgres-svc:biblioteca"
           ports:
           - containerPort: 8000
         
