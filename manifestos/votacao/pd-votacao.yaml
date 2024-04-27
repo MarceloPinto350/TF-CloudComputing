@@ -61,23 +61,23 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - name: postgres-svc
+  - name: "postgres-svc"
     port: 5432
     targetPort: 5432
 # serviço do redis
 ---
-#kind: Service
-#apiVersion: v1
-#metadata:
-#  name: redis-svc
-#  namespace: votacao
-#spec:
-#  type: ClusterIP
-#  ports:
-#  - name: redis-svc
-#    port: 6379
-#    targetPort: 6379
-# serviço da aplicação de resultado
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-svc
+  namespace: votacao
+spec:
+  type: ClusterIP
+  ports:
+  - name: "redis-svc"
+    port: 6379
+    targetPort: 6379
+ serviço da aplicação de resultado
 ---
 kind: Service
 apiVersion: v1
@@ -87,9 +87,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: resultado-svc
+  - name: "resultado-svc"
     port: 5001
-    targetPort: 81
+    targetPort: 8080
     nodePort: 31001
 # serviço da aplicação de votação
 ---
@@ -101,7 +101,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: votacao-svc
+  - name: "votacao-svc"
     port: 5000
     targetPort: 80
     nodePort: 31000
