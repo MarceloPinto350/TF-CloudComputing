@@ -48,7 +48,7 @@ spec:
               value: "banco-dados.biblioteca.svc.cluster.local"
             #  value: "postgres-svc:biblioteca"
           ports:
-          - containerPort: 8000
+            - containerPort: 8000
           livenessProbe:
           httpGet:
             path: /healthz
