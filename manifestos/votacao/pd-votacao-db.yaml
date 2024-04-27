@@ -63,4 +63,4 @@ spec:
   - name: "redis-svc"
     port: 6379
     targetPort: 6379
- serviço da aplicação de resultado
+
