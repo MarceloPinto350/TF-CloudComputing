@@ -6,6 +6,6 @@ metadata:
     app: postgres
   namespace: biblioteca
 data:
-  POSTGRES_DB: bibpubdp
+  POSTGRES_DB: bibpubdb
   POSTGRES_USER: bibpub
   
