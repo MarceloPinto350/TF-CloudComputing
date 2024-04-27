@@ -42,7 +42,7 @@ spec:
                   key: POSTGRES_DB
         # aplicação de biblioteca
         - name: app-bibpub
-          image: marcelopinto350/bibpub:1.7
+          image: marcelopinto350/bibpub:1.8
           env:
             - name: POSTGRES_HOST
               value: "10.107.250.134"
