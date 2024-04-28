@@ -14,4 +14,4 @@ spec:
           service:
             name: biblioteca-svc
             port:
-              number: 32000
+              number: 8000
