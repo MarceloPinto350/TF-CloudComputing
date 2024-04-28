@@ -14,6 +14,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: biblioteca-svc
+            name: app-bibpub
             port:
-              number: 8000
+              number: 32000

@@ -9,7 +9,7 @@ spec:
   - name: biblioteca-svc
     port: 8000
     targetPort: 8000
-    nodePort: 32000
+    nodePort: 31100
 
 ---
 apiVersion: discovery.k8s.io/v1
