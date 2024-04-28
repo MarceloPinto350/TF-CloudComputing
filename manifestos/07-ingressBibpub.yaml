@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: ingress-svc
+            name: biblioteca-svc
             port:
-              number: 8080
+              number: 32000
