@@ -12,19 +12,31 @@ spec:
     nodePort: 31100
 
 ---
-apiVersion: discovery.k8s.io/v1
-kind: EndpointSlice
+apiVersion: v1
+kind: Endpoints
 metadata:
   name: biblioteca-endpoint
   namespace: biblioteca
-addressType: IPv4
-ports:
-  - name: biblioteca-svc
-    port: 8000
-    protocol: TCP
-    appProtocol: http 
-endpoints:
+subsets:
   - addresses:
-      - "10.1.2.3"
-  - addresses:
-      - "10.4.5.6"
+  - ip: "192.168.1.2"
+  ports:
+    - port: 8000
+  name: biblioteca-svc
+
+#apiVersion: discovery.k8s.io/v1
+#kind: EndpointSlice
+#metadata:
+#  name: biblioteca-endpoint
+#  namespace: biblioteca
+#addressType: IPv4
+#ports:
+#  - name: biblioteca-svc
+#    port: 8000
+#    protocol: TCP
+#    appProtocol: http 
+#endpoints:
+#  - addresses:
+#      - "10.1.2.3"
+#  - addresses:
+#      - "10.4.5.6"
