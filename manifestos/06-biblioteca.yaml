@@ -44,18 +44,26 @@ spec:
         - name: app-bibpub
           image: marcelopinto350/bibpub:1.7
           env:
-            - name: POSTGRES_HOST
-              value: $POSTGRES_SVC_SERVICE_HOST
-            #  value: "postgres-svc:biblioteca"
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+            - name: POSTGRES_PORT
+              value: "5432"
           command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
           ports:
             - containerPort: 8000
-          #livenessProbe:
-          #  httpGet:
-          #    path: /healthz
-          #    port: 8000
-          #  initialDelaySeconds: 20
-          #  timeoutSeconds: 10
         
     #    - name: fluentd
     #      image: fluentd:latest
