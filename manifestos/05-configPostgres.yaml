@@ -8,4 +8,5 @@ metadata:
 data:
   POSTGRES_DB: bibpubdb
   POSTGRES_USER: bibpub
+  POSTGRES_HOST: postgres-svc
   

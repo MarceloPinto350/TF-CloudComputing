@@ -44,6 +44,11 @@ spec:
         - name: app-bibpub
           image: marcelopinto350/bibpub:2.0
           env:
+            - name: POSTGRES_HOST 
+              valueFrom: 
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_HOST
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:

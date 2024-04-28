@@ -189,8 +189,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 
 # copiar o trecho equivalente para incluir os workers no cluster
-sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
-	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
+sudo kubeadm join 192.168.0.14:6443 --token bf3s8v.wj0q8vr69a1p9mcv \
+	--discovery-token-ca-cert-hash sha256:4c17e5c84cb4d0ec2fb9e165481a78a046fd5a1fdebb490a1868026e33d4f986
 
 # Para verificar se está up
 kubectl get nodes -o wide
@@ -199,12 +199,14 @@ kubectl get nodes -o wide
 4. Executar os passos do script abaixo nos nós **Worker** que desejar adicionar
 ```shell
 sudo kubeadm reset
+sudo rm -rf /etc/cni/net.d
 sudo rm -rf /etc/kubernetes
 sudo rm -rf /opt/cni
+sudo rm -rf .kube
 sudo sh config-k8s.ini
 # executar o comando abaixo obtido da execução no master para adicionar o nó ao cluster
-sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
-	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
+sudo kubeadm join 192.168.0.14:6443 --token bf3s8v.wj0q8vr69a1p9mcv \
+	--discovery-token-ca-cert-hash sha256:4c17e5c84cb4d0ec2fb9e165481a78a046fd5a1fdebb490a1868026e33d4f986
 ```
 5. Para verificar se os nós foram adicionados no cluster, execute o comando abaixo no **Master**.
 * $ kubectl get nodes -o wide
