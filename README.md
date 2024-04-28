@@ -171,8 +171,16 @@ sudo sh config-k8s.ini
 # execute o comando abaixo trocando o endereço de rede pelo que estiver em modo NAT ou BRIDGE
 sudo kubeadm init --apiserver-advertise-address 192.168.0.14 --pod-network-cidr=192.168.0.0/16 --v=5
 #
-sudo kubeadm join 192.168.0.14:6443 --token 7bumjp.kybi7dz3q66kbivl \
-	--discovery-token-ca-cert-hash sha256:238d87eae8008cf4a7435db07c8899e709fd270dfebb14923d2052a7f47a62ed 
+#
+#
+# Comando que deverá ser executado par adicionar novos nós no cluster
+
+sudo kubeadm join 192.168.0.14:6443 --token bf3s8v.wj0q8vr69a1p9mcv \
+	--discovery-token-ca-cert-hash sha256:4c17e5c84cb4d0ec2fb9e165481a78a046fd5a1fdebb490a1868026e33d4f986
+
+#
+#
+#
 
 # após a conclusão da configuração
 mkdir -p $HOME/.kube
