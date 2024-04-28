@@ -4,8 +4,8 @@ metadata:
   name: biblioteca-endpoint
   namespace: biblioteca
 subsets:
-  - addresses:
-    - ip: "192.168.1.2"
+  - addresses:   
+  - ip: "192.168.1.2"
   ports:
     - port: 8000
   name: biblioteca-svc

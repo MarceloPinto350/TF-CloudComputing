@@ -10,6 +10,7 @@ spec:
     port: 8000
     targetPort: 8000
     nodePort: 31100
+    endpoint: biblioteca-endpoint
 
 #apiVersion: discovery.k8s.io/v1
 #kind: EndpointSlice
