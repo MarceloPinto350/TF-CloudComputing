@@ -5,7 +5,7 @@ metadata:
   namespace: biblioteca
 subsets:
   - addresses:   
-  - ip: 192.168.84.100
+    ip: 192.168.84.100
     ports:
       - port: 31100
     name: biblioteca-svc
