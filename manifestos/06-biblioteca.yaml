@@ -49,12 +49,12 @@ spec:
             #  value: "postgres-svc:biblioteca"
           ports:
             - containerPort: 8000
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8000
-            initialDelaySeconds: 20
-            timeoutSeconds: 10
+          #livenessProbe:
+          #  httpGet:
+          #    path: /healthz
+          #    port: 8000
+          #  initialDelaySeconds: 20
+          #  timeoutSeconds: 10
         
     #    - name: fluentd
     #      image: fluentd:latest
