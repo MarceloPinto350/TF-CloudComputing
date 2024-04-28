@@ -16,4 +16,4 @@ spec:
           service:
             name: app-bibpub
             port:
-              number: 32000
+              number: 31100
