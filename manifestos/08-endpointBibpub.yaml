@@ -7,6 +7,6 @@ subsets:
   - addresses:   
     - ip: 192.168.84.100  
     ports:
-      - name: app
+      - name: biblioteca-svc
         port: 31100
     
