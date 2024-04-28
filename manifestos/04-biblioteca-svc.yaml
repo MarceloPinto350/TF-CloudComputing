@@ -9,8 +9,10 @@ spec:
   - name: biblioteca-svc
     port: 8000
     targetPort: 8000
-    nodePort: 31100
-    endpoint: biblioteca-endpoint
+    nodePort: 31100 
+  selector:
+    app: app-biblioteca
+
 
 #apiVersion: discovery.k8s.io/v1
 #kind: EndpointSlice
