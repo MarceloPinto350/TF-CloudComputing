@@ -42,7 +42,7 @@ spec:
                   key: POSTGRES_DB
         # aplicação de biblioteca
         - name: app-bibpub
-          image: marcelopinto350/bibpub:1.7
+          image: marcelopinto350/bibpub:2.0
           env:
             - name: POSTGRES_DB
               valueFrom:
