@@ -82,13 +82,13 @@ spec:
     #      - "-c"
     #      - "/fluentd/etc/fluentd.conf"
 
-        - name: nginx
-          image: marcelopinto350/bibpub-nginx:1.0
-          ports:
-          - containerPort: 80
-          volumeMounts:
-          - name: logs
-            mountPath: /var/log/nginx
+#        - name: nginx
+#          image: marcelopinto350/bibpub-nginx:1.0
+#          ports:
+#          - containerPort: 80
+#          volumeMounts:
+#          - name: logs
+#            mountPath: /var/log/nginx
       
       volumes:
         - name: postgresdb
@@ -97,6 +97,6 @@ spec:
     #    - name: fluentd-config
     #      configMap:
     #        name: fluentd-config 
-        - name: logs
-          emptyDir: {}
+#        - name: logs
+#          emptyDir: {}
 
