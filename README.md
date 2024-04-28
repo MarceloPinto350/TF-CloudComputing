@@ -233,3 +233,12 @@ $ git clone https://github.com/MarceloPinto350/TF-CloudComputing.git
 $ kubectl apply -f /manifestos/criaNamespace,yaml
 $ kubectl apply -f /manifestos/
 ```
+
+## Configuração do ingress/nginx
+
+* Instalar o Nginx controller 
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+```
+
+Aplicar o manifesto 07-ingressBibpub.yaml
