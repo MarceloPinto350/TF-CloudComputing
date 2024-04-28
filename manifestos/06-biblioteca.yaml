@@ -45,7 +45,7 @@ spec:
           image: marcelopinto350/bibpub:1.7
           env:
             - name: POSTGRES_HOST
-              value: "banco-dados.biblioteca.svc.cluster.local"
+              value: $POSTGRES_SVC_SERVICE_HOST
             #  value: "postgres-svc:biblioteca"
           command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
           ports:
