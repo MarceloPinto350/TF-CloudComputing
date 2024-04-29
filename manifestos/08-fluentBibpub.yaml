@@ -27,7 +27,6 @@ spec:
           - "/fluentd/etc/fluentd.conf"
   
       volumes:
-        - name: fluentd-config
-          configMap:
-            name: fluentd-config 
+        - name: logs
+          emptyDir: {}
 
