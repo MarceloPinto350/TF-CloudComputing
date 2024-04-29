@@ -1,29 +1,36 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: redis
+  name: app-redis
   namespace: biblioteca
-  labels:
-    app: redis
 spec:
-  containers:
-    # container do redis
-    - image: redis:alpine
-      name: redis
-      ports:
-        - containerPort: 6379
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-redis
+  template:
+    metadata:
+      labels:
+          app: app-redis
+    spec:
+      containers:
+        # container do redis
+        - image: redis:alpine
           name: redis
-      volumeMounts:
-        - mountPath: /data
-          name: redis-data
-  nodeSelector:
-    tiposvc: db  
+          ports:
+            - containerPort: 6379
+              name: redis
+          volumeMounts:
+            - mountPath: /data
+              name: redis-data
+      nodeSelector:
+        tiposvc: db  
 
-  # volumes para persistência de dados  
-  volumes:
-    - name: redis-data
-      emptyDir: {}
-          
+      # volumes para persistência de dados  
+      volumes:
+        - name: redis-data
+          emptyDir: {}
+              
 # colocação dos serviços para acesso externo
 ---
 kind: Service
