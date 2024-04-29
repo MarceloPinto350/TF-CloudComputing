@@ -21,9 +21,9 @@ spec:
           volumeMounts:
           - name: fluentd-conf
             mountPath: /var/log/bibpub
-          env:
-            - name: FLUENTD_CONF
-              value: /fluentd/etc/fluent.conf
+          #env:
+          #  - name: FLUENTD_CONF
+          #    value: /fluentd/etc/fluent.conf
           
       volumes:
         - name: fluentd-conf
