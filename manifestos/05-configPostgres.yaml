@@ -8,5 +8,5 @@ metadata:
 data:
   POSTGRES_DB: bibpubdb
   POSTGRES_USER: bibpub
-  POSTGRES_HOST: 192.168.84.201
+  POSTGRES_HOST: 192.168.84.200
   

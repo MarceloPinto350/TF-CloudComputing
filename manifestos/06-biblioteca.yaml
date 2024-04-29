@@ -69,22 +69,17 @@ spec:
           command: ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
           ports:
             - containerPort: 8000
-        
-    #    - name: fluentd
-    #      image: fluentd:latest
-    #      ports:
-    #        - containerPort: 3100
-    #      volumeMounts:
-    #      - name: logs
-    #        mountPath: /var/log/bibpub
-    #      command:
-    #      - "fluentd"
-    #      - "-c"
-    #      - "/fluentd/etc/fluentd.conf"
-
+        # fluentd 
+        - name: fluentd
+          image: fluentd:latest
+          ports:
+            - containerPort: 3100
+          volumeMounts:
+          - name: fluentd-conf
+            mountPath: /var/log/bibpub
+        # nginx  
         - name: nginx
           image: nginx:latest
-          #image: marcelopinto350/bibpub-nginx:1.0
           ports:
           - containerPort: 80
           volumeMounts:
@@ -95,9 +90,9 @@ spec:
         - name: postgresdb
           persistentVolumeClaim:
             claimName: postgres-pvc
-    #    - name: fluentd-config
-    #      configMap:
-    #        name: fluentd-config 
+        - name: fluentd-config
+          configMap:
+            name: fluentd-config 
         - name: logs
           emptyDir: {}
 
