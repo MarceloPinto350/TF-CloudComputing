@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  namespace: biblioteca
+data:
+  fluent.conf: |-
+    <source>
+      @type forward
+      port 24224
+    </source>
+
+    <match **>
+      @type file
+      path /fluentd/log/kubernetes.*.log
+      symlink_path /fluentd/log/kubernetes.log
+      append true
+      flush_interval 10s
+    </match>
+
+    

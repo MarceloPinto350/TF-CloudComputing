@@ -19,14 +19,14 @@ spec:
           ports:
             - containerPort: 3100
           volumeMounts:
-          - name: logs
+          - name: fluentd-conf
             mountPath: /var/log/bibpub
-          command:
-          - "fluentd"
-          - "-c"
-          - "/fluentd/etc/fluentd.conf"
-  
+          env:
+            - name: FLUENTD_CONF
+              value: /fluentd/etc/fluent.conf
+          
       volumes:
-        - name: logs
-          emptyDir: {}
+        - name: fluentd-conf
+          configMap:
+            name: fluentd-config
 
