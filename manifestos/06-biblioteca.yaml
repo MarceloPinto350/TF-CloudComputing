@@ -75,7 +75,7 @@ spec:
           ports:
             - containerPort: 3100
           volumeMounts:
-          - name: fluentd-conf
+          - name: fluentd-config
             mountPath: /var/log/bibpub
         # nginx  
         - name: nginx
