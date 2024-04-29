@@ -1,8 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: votacao-redis
-  namespace: votacao
+  name: redis
+  namespace: biblioteca
+  labels:
+    app: redis
 spec:
   containers:
     # container do redis
@@ -28,11 +30,12 @@ kind: Service
 apiVersion: v1
 metadata:
   name: redis-svc
-  namespace: votacao
+  namespace: biblioteca
 spec:
   type: ClusterIP
   ports:
   - name: "redis-svc"
     port: 6379
     targetPort: 6379
-
+  selector:
+    app: redis
